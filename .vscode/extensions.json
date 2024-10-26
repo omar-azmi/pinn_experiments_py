@@ -1,0 +1,10 @@
+{
+	"recommendations": [
+		"ms-python.python",
+		"ms-python.debugpy",
+		"ms-pyright.pyright",
+		"ms-python.autopep8",
+		"mgesbert.python-path",
+		"denoland.vscode-deno",
+	]
+}

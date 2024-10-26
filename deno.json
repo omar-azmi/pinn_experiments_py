@@ -1,0 +1,43 @@
+{
+	"name": "pinn_experiments_py",
+	"version": "0.1.0",
+	"description": "experimenting with physics informed neural networks (pinns).",
+	"author": "Omar Azmi",
+	"license": "Anti-Competition License",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/omar-azmi/pinn_experiments_py.git"
+	},
+	"bugs": {
+		"url": "https://github.com/omar-azmi/pinn_experiments_py/issues"
+	},
+	"exports": {},
+	"fmt": {
+		"useTabs": true,
+		"semiColons": false,
+		"singleQuote": false,
+		"lineWidth": 800,
+		"proseWrap": "preserve",
+		"include": [
+			"./src/",
+			"./src/**/*.ipynb",
+			"./*.md"
+		]
+	},
+	"compilerOptions": {
+		"lib": [
+			"esnext",
+			"dom",
+			"deno.ns"
+		],
+		"strict": true
+	},
+	"packageJson": {
+		"dependencies": {},
+		"devDependencies": {
+			"typescript": "^5.0.0"
+		},
+		"keywords": []
+	},
+	"tasks": {}
+}
