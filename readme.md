@@ -22,7 +22,7 @@ Lets try to solve the problem analytically to arrive at an exact solution, and p
 Given the shape of the PDE, let's assume that $u_{(x, t)}$ carries the following form:
 
 $$
-u_{(x, t)} = A \cdot e^{\omega t + \gamma x} \quad , \quad \text{where} \quad A, \omega, \gamma \in \R
+u_{(x, t)} = A \cdot e^{\omega t + \gamma x} \quad , \quad \text{where} \quad A, \omega, \gamma \in \Bbb{R}
 $$
 
 Let's compute the partial differentials of $u$ with respect to $x$ and $t$, since they are used in the PDE:
@@ -65,15 +65,15 @@ Needless to say, these data points will be somewhat lacking, as they only occupy
 ### What is the loss function here?
 
 Suppose we run the neural network with input points $(x, t) \in \Gamma$ (in other words: $\Gamma \subset [0, 2] \times [0, 1]$ ).
-Then, the resulting predicted output values of $u$ for each data point will be $\widetilde{u}_{(x, y)}$ ,
+Then, the resulting predicted output values of $u$ for each data point will be $\widetilde{u}_ {(x, y)}$ ,
 with the actual "true" (training data) values being $u_{(x, t)}$ .
 
-The loss function $\mathcal{L}_{u}$ is then defined as the mean-squared-difference between the expectation $\widetilde{u}_{(x, y)}$ , and the training value $u_{(x, t)}$ .
+The loss function $\mathcal{L}_ {u}$ is then defined as the mean-squared-difference between the expectation $\widetilde{u}_ {(x, y)}$ , and the training value $u_ {(x, t)}$ .
 
-$$
-\mathcal{L}_{u} = \frac{1}{\#{\Gamma}} \sum_{\forall (x, t) \in \Gamma}{ \left( u_{(x, t)} - \widetilde{u}_{(x, y)} \right)^{2} } \\
-\text{where } \#{\Gamma} \text{ represents the number of elements in the set } \Gamma \text{ (i.e. cardinality)}
-$$
+$$\begin{gathered}
+\mathcal{L}_ {u} = \frac{1}{\\#{\Gamma}} \sum_{\forall (x, t) \in \Gamma}{ \left( u_{(x, t)} - \widetilde{u}_{(x, y)} \right)^{2} } \\
+\text{where } \\#{\Gamma} \text{ represents the number of elements in the set } \Gamma \text{ (i.e. cardinality)}
+\end{gathered}$$
 
 ### What are the components of a Neural Network?
 
@@ -125,7 +125,7 @@ To do so, we simply pick a non-linear 1D function $s_{(v)}$ of our choice (such 
 To simplify our declaration for matrix-wise operations, we need to introduce the following vector notation:
 
 $$
-s(\vec{Y}) \coloneqq \lang s(Y_{0}), s(Y_{1}), \dots, s(Y_{M - 1}) \rang
+s(\vec{Y}) \coloneqq \langle s(Y_{0}), s(Y_{1}), \dots, s(Y_{M - 1}) \rangle
 $$
 
 So now, in terms of layer-wise matrices, we get the following expression for computing $\vec{U}$ , given some input $\vec{X}$ :
@@ -144,7 +144,7 @@ Every layer must exhibit some form of non-linearity, otherwise it _will_ be redu
 
 Typically, the hidden nodes of a neural network use simple matrix-based linear computation on their inputs, then add a constant bias value, and finally follow it up by applying a non-linear function onto each element of the output vector.
 
-Given a hidden layer $H^{(k)}$ , with dimensionality $Dim(H^{(k)}) = \lang a, b \rang$ ($b$ number of inputs and $a$ number of outputs (i.e. $a$ is also the number of nodes in that layer)):
+Given a hidden layer $H^{(k)}$ , with dimensionality $Dim(H^{(k)}) = \langle a, b \rangle$ ($b$ number of inputs and $a$ number of outputs (i.e. $a$ is also the number of nodes in that layer)):
 
 - Each node $i \in \{1, \dots, a\}$ is a $(1 \times b)$ matrix, consisting of:
   - The matrix entries $W_{ij}$ (for $j \in \{1, \dots, b\}$ ), known as the `weights` of the $i^{th}{-}\text{node}$.
@@ -152,21 +152,21 @@ Given a hidden layer $H^{(k)}$ , with dimensionality $Dim(H^{(k)}) = \lang a, b 
   - A scalar non-linear function $S_{i (v)}$ , known as the `activation function` of the $i^{th}{-}\text{node}$.
 - Thus an input $b{-}\text{dimensional}$ vector $\vec{V}$ will be transformed by the $i^{th}{-}\text{node}$ into the scalar value:
 
-  $$
-  S_{i}(B_{i} + W_{i:} \vec{V})
-  $$
+$$
+S_{i}(B_{i} + W_{i:} \vec{V})
+$$
 
 - Therefore, the layer as a whole transforms some $b{-}\text{dimensional}$ input $\vec{V}$ to the $a{-}\text{dimensional}$ vector:
 
-  $$
-  H^{(k)}(\vec{V}) \coloneqq S(B + W_{::} \vec{V})
-  $$
+$$
+H^{(k)}(\vec{V}) \coloneqq S(B + W_{::} \vec{V})
+$$
 
 - To make it clearer that each component of the expression is associated with the $k^{th}$ hidden layer, we use the $(k)$ superscript on each component:
 
-  $$
-  H^{(k)}(\vec{V}) \coloneqq S^{(k)}(B^{(k)} + W^{(k)} \vec{V})
-  $$
+$$
+H^{(k)}(\vec{V}) \coloneqq S^{(k)}(B^{(k)} + W^{(k)} \vec{V})
+$$
 
 As a whole, our $N$ hidden-layered neural network can now be mathematically defined as:
 
@@ -180,7 +180,7 @@ But it might be clearer to write the recursion iteratively:
 $$\begin{align}
 \vec{h}^{(-1)} & \coloneqq \vec{X} \\
 \vec{h}^{(k)} & \coloneqq S^{(k)}(B^{(k)} + W^{(k)} \vec{h}^{(k - 1)}) \quad , \quad \text{for } k \in \{0, \dots, N\} \\
-S^{(k)} & \enskip \text{is a non-linear function} \quad , \quad \text{for } k \in \{0, \dots, N - 1\} \\
+S^{(k)} & \hspace{0.5em} \text{is a non-linear function} \quad , \quad \text{for } k \in \{0, \dots, N - 1\} \\
 S^{(N)} & \coloneqq \Bbb{1} \quad \text{(the identity function (linear))} \\
 \vec{U}^{(k)} & \coloneqq \vec{h}^{(N)}
 \end{align}$$
